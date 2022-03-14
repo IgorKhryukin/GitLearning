@@ -1,5 +1,6 @@
 import java.io.*;
 import java.nio.file.Path;
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,7 +13,7 @@ public class GitLearning {
 
     public static void main(String[] args) {
 
-        int key = 7;
+        int key = 10;
         Path path = Path.of("Texts\\test.txt");
         Path path2 = Path.of("Texts\\encode.txt");
 
@@ -23,16 +24,20 @@ public class GitLearning {
         //System.out.println(testMap);
         //Map<Character, Integer> encodeMap = charsCounter(path2);
         //System.out.println(encodeMap);
-
+        LocalTime localTime1 = LocalTime.now();
+        System.out.println(localTime1);
         bruteForceDecoder(path2);
-        try(BufferedReader bufferedReader = new BufferedReader(new FileReader(String.valueOf(path)))){
+        LocalTime localTime2 = LocalTime.now();
+        System.out.println(localTime2);
+
+        /*try(BufferedReader bufferedReader = new BufferedReader(new FileReader(String.valueOf(path)))){
             String str = bufferedReader.readLine();
             if(str.contains(" и ") || str.contains(" в ") || str.contains(" с ") || str.contains(" о ")){
                 System.out.println(true);
             }
         } catch (IOException e){
             e.printStackTrace();
-        }
+        }*/
 
     }
 
@@ -43,11 +48,15 @@ public class GitLearning {
             try(BufferedReader bufferedReader = new BufferedReader(new FileReader("Texts\\decode.txt"))) {
                 while(bufferedReader.ready()) {
                     String str = bufferedReader.readLine();
-                    if (str.contains(" и ") || str.contains(" в ") || str.contains(" с ") || str.contains(" о ") || str.contains(" на ")) {
+                    if (str.contains(" и ") || str.contains(" в ") || str.contains(" с ") || str.contains(" о ") || str.contains(" на ") || str.contains(". ") || str.contains("! ") || str.contains(", ")) {
                         if (str.contains(". ") || str.contains("! ") || str.contains(", ")) {
-                            System.out.println("Файл раскодирован");
-                            flag = true;
-                            break;
+                            if(str.contains(" и ") || str.contains(" в ") || str.contains(" с ") || str.contains(" о ") || str.contains(" на ")) {
+                                if(str.contains(" он ") || str.contains(" я ") || str.contains(" мы ") || str.contains(" вы ") || str.contains(" она ")) {
+                                    System.out.println("Файл раскодирован");
+                                    flag = true;
+                                    break;
+                                }
+                            }
                         }
                     }
                 }
