@@ -13,11 +13,11 @@ public class GitLearning {
 
     public static void main(String[] args) {
 
-        int key = 10;
+        int key = 3;
         Path path = Path.of("Texts\\test.txt");
         Path path2 = Path.of("Texts\\encode.txt");
 
-        encodeFunction(path, key);
+        //encodeFunction(path, key);
         //decodeFunction(path2, key);
 
         //Map<Character, Integer> testMap = charsCounter(path);
@@ -26,9 +26,18 @@ public class GitLearning {
         //System.out.println(encodeMap);
         LocalTime localTime1 = LocalTime.now();
         System.out.println(localTime1);
-        bruteForceDecoder(path2);
+        //bruteForceDecoder(path2);
         LocalTime localTime2 = LocalTime.now();
         System.out.println(localTime2);
+
+        Map<Character, Integer> newMap = charsCounter(path);
+
+        for (char ch :
+                newMap.keySet()) {
+            System.out.println(ch + " - " + newMap.get(ch));
+        }
+
+
 
         /*try(BufferedReader bufferedReader = new BufferedReader(new FileReader(String.valueOf(path)))){
             String str = bufferedReader.readLine();
@@ -51,7 +60,7 @@ public class GitLearning {
                     if (str.contains(" и ") || str.contains(" в ") || str.contains(" с ") || str.contains(" о ") || str.contains(" на ") || str.contains(". ") || str.contains("! ") || str.contains(", ")) {
                         if (str.contains(". ") || str.contains("! ") || str.contains(", ")) {
                             if(str.contains(" и ") || str.contains(" в ") || str.contains(" с ") || str.contains(" о ") || str.contains(" на ")) {
-                                if(str.contains(" он ") || str.contains(" я ") || str.contains(" мы ") || str.contains(" вы ") || str.contains(" она ")) {
+                                if(str.contains(" он ") || str.contains(" я ") || str.contains(" мы ") || str.contains("Вы ") || str.contains(" она ") || str.contains(" вы ")) {
                                     System.out.println("Файл раскодирован");
                                     flag = true;
                                     break;
