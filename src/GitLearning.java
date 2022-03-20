@@ -11,14 +11,18 @@ public class GitLearning {
             , 'Т', 'т', 'У', 'у', 'Ф', 'ф', 'Х', 'х', 'Ц', 'ц', 'Ч', 'ч', 'Ш', 'ш', 'Щ', 'щ', 'Ъ', 'ъ', 'Ы', 'ы', 'Ь', 'ь', 'Э', 'э'
             , 'Ю', 'ю', 'Я', 'я', '.', ',', '«', '»', ':', '!', '?', ' '};
 
+    public static final String STRING_ALPHABET = Arrays.toString(ALPHABET);
+
     public static void main(String[] args) {
 
         int key = 3;
         Path path = Path.of("Texts\\test.txt");
         Path path2 = Path.of("Texts\\encode.txt");
+        String t = "test.txt";
 
-        //encodeFunction(path, key);
-        //decodeFunction(path2, key);
+
+        encodeFunction(path, key);
+        decodeFunction(path2, key);
 
         //Map<Character, Integer> testMap = charsCounter(path);
         //System.out.println(testMap);
@@ -29,13 +33,14 @@ public class GitLearning {
         //bruteForceDecoder(path2);
         LocalTime localTime2 = LocalTime.now();
         System.out.println(localTime2);
+        System.out.println(ALPHABET.length);
 
-        Map<Character, Integer> newMap = charsCounter(path);
+        /*Map<Character, Integer> newMap = charsCounter(path);
 
         for (char ch :
                 newMap.keySet()) {
             System.out.println(ch + " - " + newMap.get(ch));
-        }
+        }*/
 
 
 
@@ -107,19 +112,15 @@ public class GitLearning {
             FileWriter fileWriter = new FileWriter(String.valueOf(path2))){
             while(fileReader.ready()){
                 char temp = (char) fileReader.read();
-                /*if(Arrays.asList(ALPHABET).contains(temp)) {
-                    for (int i = 0; i < ALPHABET.length; i++) {
-                        if (temp == ALPHABET[i]) {
-                            if (i + key >= ALPHABET.length) {
-                                fileWriter.write(ALPHABET[i + key - ALPHABET.length]);
-                            } else {
-                                fileWriter.write(ALPHABET[i + key]);
-                            }
-                        }
-                    }
-                } else {
+                String s = "" + temp;
+                if(s.equals("\n")){
+                    fileWriter.write("\n");
+                    continue;
+                }
+                if(!STRING_ALPHABET.contains(s)){
                     fileWriter.write(temp);
-                }*/
+                    continue;
+                }
                 for (int i = 0; i < ALPHABET.length; i++) {
                     if (temp == ALPHABET[i]) {
                         if (i + key >= ALPHABET.length) {
@@ -127,6 +128,7 @@ public class GitLearning {
                         } else {
                             fileWriter.write(ALPHABET[i + key]);
                         }
+                        break;
                     }
                 }
             }
@@ -143,6 +145,15 @@ public class GitLearning {
             FileWriter fileWriter = new FileWriter(String.valueOf(path2))){
             while (fileReader.ready()){
                 char temp = (char) fileReader.read();
+                String s = "" + temp;
+                if(s.equals("\n")){
+                    fileWriter.write("\n");
+                    continue;
+                }
+                if(!STRING_ALPHABET.contains(s)){
+                    fileWriter.write(temp);
+                    continue;
+                }
                 for (int i = 0; i < ALPHABET.length; i++) {
                     if(temp == ALPHABET[i]){
                         if(i - key < 0){
@@ -150,6 +161,7 @@ public class GitLearning {
                         } else {
                             fileWriter.write(ALPHABET[i - key]);
                         }
+                        break;
                     }
                 }
             }
